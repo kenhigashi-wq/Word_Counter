@@ -1,7 +1,7 @@
 #KH main page for Word Counter
 from file_utils import read_document, add_content, update_metadata, ensure_file
 from time_utils import get_timestamp
-
+#display menu
 def menu():
     print("\n--- Document Word Count Updater ---")
     print("1. Update document info")
@@ -9,11 +9,13 @@ def menu():
     print("3. Add content to document")
     print("4. Exit")
 
+#function for geting file path
 def get_file_path(existing_path):
     if existing_path:
         return existing_path
     return input("Enter the exact file path for your document: ").strip()
 
+#function for handling update
 def handle_update(file_path):
     file_path = get_file_path(file_path)
     ensure_file(file_path)
@@ -26,6 +28,7 @@ def handle_update(file_path):
     print(f"Document Updated. Word Ccount: {word_count}")
     return file_path
 
+#function for handling view
 def handle_view(file_path):
     file_path = get_file_path(file_path)
     try:
@@ -36,6 +39,7 @@ def handle_view(file_path):
         print("File not found, please be more smart")
     return file_path
 
+#function for handing the add content
 def handle_add_content(file_path):
     file_path = get_file_path(file_path)
     print("\nEnter new content (press enter twice to finish): ")
@@ -57,6 +61,7 @@ def handle_add_content(file_path):
 
     return file_path
 
+#main function
 def main():
     file_path = None
 

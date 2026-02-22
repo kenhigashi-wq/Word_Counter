@@ -28,6 +28,7 @@ def split_content_and_metadata(text):
 
     return "\n".join(content_lines).strip(), "\n".join(data_lines).strip()
     
+#function for reading the document content
 def read_document(path):
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
@@ -35,6 +36,7 @@ def read_document(path):
         content, _ = split_content_and_metadata(text)
         return content
 
+#function for adding stuff to doc
 def add_content(path, new_text):
     with open (path, "r", encoding="utf-8") as f:
         text = f.read()
@@ -49,6 +51,7 @@ def add_content(path, new_text):
     with open(path, "w", encoding="utf-8") as f:
         f.write(updated)
 
+#function for updating the data block
 def update_metadata(path, word_count, time_stamp):
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
