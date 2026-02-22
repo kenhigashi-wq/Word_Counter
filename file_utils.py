@@ -7,7 +7,7 @@ def ensure_file(path):
     except FileNotFoundError:
         open(path, "w").close()
 
-def split_content_and_data(text):
+def split_content_and_metadata(text):
     lines = text.strip().split("\n")
     content_lines = []
     data_lines = []
@@ -26,20 +26,20 @@ def split_content_and_data(text):
             content_lines.append(lines[i])
             i += 1#move to next line
 
-        return "\n".join(content_lines).strip(), "\n".join(data_lines).strip()
+    return "\n".join(content_lines).strip(), "\n".join(data_lines).strip()
     
 def read_document(path):
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
 
-        content, _ = split_content_and_data(text)
+        content, _ = split_content_and_metadata(text)
         return content
 
 def add_content(path, new_text):
     with open (path, "r", encoding="utf-8") as f:
         text = f.read()
     
-    content, data = split_content_and_data(text)
+    content, data = split_content_and_metadata(text)
 
     updated = content + "\n" + new_text.strip() + "\n"
 
@@ -49,20 +49,20 @@ def add_content(path, new_text):
     with open(path, "w", encoding="utf-8") as f:
         f.write(updated)
 
-def updated_data(path, word_count, time_stamp):
+def update_metadata(path, word_count, time_stamp):
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    content, data = split_content_and_data(text)
+    content, data = split_content_and_metadata(text)
 
-    new_block = f"Word Count: {word_count}\n Last updates {time_stamp}"
+    new_block = f"Word Count: {word_count}\nLast Updated: {time_stamp}"
 
     if data:
-        updated_data = data + "\n\n" + new_block
+        combined_metadata = data + "\n\n" + new_block
     else:
-        updated_data = new_block
+        combined_metadata = new_block
     
-    final_text = content + "\n\n" + updated_data + "\n"
+    final_text = content + "\n\n" + combined_metadata + "\n"
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(final_text)

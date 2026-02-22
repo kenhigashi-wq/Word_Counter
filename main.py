@@ -1,5 +1,5 @@
 #KH main page for Word Counter
-from file_utils import read_document, add_content, updated_data, ensure_file
+from file_utils import read_document, add_content, update_metadata, ensure_file
 from time_utils import get_timestamp
 
 def menu():
@@ -22,15 +22,15 @@ def handle_update(file_path):
     word_count = len(content.split())
     timestamp = get_timestamp()
 
-    updated_data(file_path, word_count, timestamp)
-    print(f"document updated. word count: {word_count}")
+    update_metadata(file_path, word_count, timestamp)
+    print(f"Document Updated. Word Ccount: {word_count}")
     return file_path
 
 def handle_view(file_path):
     file_path = get_file_path(file_path)
     try:
         content = read_document(file_path)
-        print("Document content stuff:")
+        print("\nDocument content stuff:")
         print(content if content else "doc is empty")
     except FileNotFoundError:
         print("File not found, please be more smart")
