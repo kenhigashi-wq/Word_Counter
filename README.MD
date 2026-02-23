@@ -1,3 +1,2 @@
-read my thing
-Run in the main page. 
-Yay
+Run program in main.py
+Type in the path when told, not the relative path. Probably
